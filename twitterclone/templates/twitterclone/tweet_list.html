@@ -1,0 +1,16 @@
+<ul>
+    {% for tweet in follows_tweet_list %}
+    <li>
+        <a href="{% url 'user_detail' tweet.author.user.id %}"
+            >@{{ tweet.author }}</a
+        >
+        -
+        <a href="/tweet/{{tweet.id}}">{{tweet.time_created}}.</a>
+        <ul>
+            <li>
+                {{tweet.content}}
+            </li>
+        </ul>
+    </li>
+    {% endfor %}
+</ul>

@@ -3,9 +3,9 @@ from twitterclone.tweet.models import Tweet
 from twitterclone.twitteruser.models import TwitterUser
 
 class Notification(models.Model):
-    notification_unread = models.BooleanField(default=True)
-    notification_tweet = models.ForeignKey(Tweet, on_delete=models.CASCADE)
-    notification_user = models.ForeignKey(TwitterUser, on_delete=models.CASCADE)
+    recipient = models.ForeignKey(TwitterUser, on_delete=models.CASCADE)
+    tweet = models.ForeignKey(Tweet, on_delete=models.CASCADE)
+    unread = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.notification_tweet
+        return self.tweet

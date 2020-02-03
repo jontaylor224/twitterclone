@@ -15,13 +15,12 @@ def login_view(request):
             )
         if user:
             login(request, user)
-            return HttpResponseRedirect(
-                request.GET.get('next', reverse('homepage'))
-            )
-    form = LoginForm
-    return render(request, 'login.html', {'form': form, 'page': 'login'})
+            return HttpResponseRedirect(request.GET.get('next', 'user_detail'))
+    else:
+        form = LoginForm
+        return render(request, 'twitterclone/login.html', {'form': form})
 
 @login_required
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse('login'))
+    return HttpResponseRedirect('/')

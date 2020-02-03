@@ -1,0 +1,23 @@
+<h4>You have {{ notification_count }} unread notifications</h4>
+{% if notification_count %}
+<ul>
+    {% for notification in notifications %}
+    <li>
+        <a href="{% url 'user_detail' notification.tweet.author.user.id %}"
+            >@{{ notification.tweet.author.user.username }}</a
+        >
+        -
+        <a href="/tweet/{{notification.tweet.id}}"
+            >{{notification.tweet.time_created}}.</a
+        >
+        <ul>
+            <li>
+                {{notification.tweet.content}}
+            </li>
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+<hr>
+<a href="/">Home</a>

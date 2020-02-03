@@ -19,12 +19,18 @@ from django.urls import path
 
 from . import views
 from twitterclone.authentication.urls import urlpatterns as auth_urls
+from twitterclone.notification.urls import urlpatterns as notification_urls
+from twitterclone.twitteruser.urls import urlpatterns as user_urls
+from twitterclone.tweet.urls import urlpatterns as tweet_urls
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('/', views.index, name='index'),
+    # path('accounts/', include('django.contrib.auth.urls')),
+    path('', views.index, name='index'),
 ]
 
 urlpatterns.extend(auth_urls)
+urlpatterns.extend(notification_urls)
+urlpatterns.extend(user_urls)
+urlpatterns.extend(tweet_urls)

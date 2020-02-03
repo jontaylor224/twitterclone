@@ -1,0 +1,18 @@
+<h2>Users:</h2>
+
+{% if user_list %}
+
+
+<ul>
+    {% for user in user_list  %}
+        <li>
+            <a href="{% url 'user_detail' user.user_id %}">@{{ user }}</a>  -  
+            {% if user in follows_list %}
+            <a href="{% url 'unfollow' user.user_id %}">Unfollow</a>
+            {% else %}
+            <a href="{% url 'follow' user.user_id %}">Follow</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endif %}

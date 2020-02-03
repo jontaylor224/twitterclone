@@ -1,0 +1,14 @@
+
+
+    <div>
+        <h2>Welcome to Twitterclone!</h2>
+        <h3>Log in to get posting and see what your friends are up to!</h3>
+        <hr>
+        <h3>Don't have an account?  <a href="{% url 'sign_up' %}">Sign up here!</a></h3>
+    </div>
+    <h2>User Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>

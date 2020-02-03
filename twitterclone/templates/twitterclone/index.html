@@ -9,15 +9,29 @@
     </head>
     <body>
         <h1>Twitterclone</h1>
-        <a href="">Home</a>
-        <a href="">New Tweet</a>
-        <a href="">My Profile</a>
-        <a href="">Notifications</a>
+        {% if user.is_authenticated %}
+        <a href="/">Home</a>
+        <a href="{% url 'addtweet' %}">New Tweet</a>
+        <a href="{% url 'user_detail' request.user.id %}">My Profile</a>
+        <a href="{% url 'notifications' %}">Notifications: {{notification_count}}</a>
+        <a href="{% url 'logout' %}">Logout</a>
+
         <hr />
+        {% block userprofile %}
+            {% include 'twitterclone/user_detail.html' %}
+        {% endblock userprofile %}
 
-        {% block content %}
+        {% block tweetlist %}
+            {% include 'twitterclone/tweet_list.html' %}
+        {% endblock tweetlist %}
 
-        {% endblock content %}
+        {% block userlist %}
+            {% include 'twitterclone/user_list.html' %}
+        {% endblock userlist %}
+
+        {% endif %}
+
+
 
     </body>
 </html>
