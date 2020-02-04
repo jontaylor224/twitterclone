@@ -3,14 +3,16 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.views import View
 from twitterclone.tweet.models import Tweet
 from twitterclone.twitteruser.models import TwitterUser
 
+class Create_New_User(View):
+    def get(self, request, *args, **kwargs):
+        form = UserCreationForm()
+        return render(request, 'twitterclone/sign_up.html', {'form': form})
 
-def create_new_user(request):
-    if request.user.is_authenticated:
-        logout(request)
-    if request.method == 'POST':
+    def post(self, request, *args, **kwargs):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
@@ -24,9 +26,6 @@ def create_new_user(request):
 
             login(request, user)
             return HttpResponseRedirect('/')
-    else:
-        form = UserCreationForm()
-    return render(request, 'twitterclone/sign_up.html', {'form': form})
 
 
 @login_required
